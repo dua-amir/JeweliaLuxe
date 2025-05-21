@@ -1,7 +1,7 @@
+
 import React, { useContext, useEffect, useState } from 'react';
 import { useNavigate } from 'react-router-dom';
 import { ShopContext } from '../context/ShopContext';
-import Title from '../components/Title';
 
 const Cart = () => {
   const { products, currency, cartItems, removeFromCart, addToCart, decreaseCart } = useContext(ShopContext);
@@ -10,27 +10,24 @@ const Cart = () => {
   const navigate = useNavigate();
   const shippingFee = 15;
 
-  // 🔄 Update cart data and send to DB
+  // Update cart data and save to DB
   useEffect(() => {
     const tempData = [];
     let tempSubtotal = 0;
 
     for (const itemId in cartItems) {
-      for (const size in cartItems[itemId]) {
-        if (cartItems[itemId][size] > 0) {
-          const product = products.find(p => p._id === itemId || p.id === itemId);
-          const quantity = cartItems[itemId][size];
+      const quantity = cartItems[itemId];
+      if (quantity > 0) {
+        const product = products.find(p => p._id === itemId || p.id === itemId);
 
-          if (product) {
-            tempData.push({
-              productId: itemId,
-              size,
-              quantity,
-              price: product.price,
-            });
+        if (product) {
+          tempData.push({
+            productId: itemId,
+            quantity,
+            price: product.price,
+          });
 
-            tempSubtotal += product.price * quantity;
-          }
+          tempSubtotal += product.price * quantity;
         }
       }
     }
@@ -47,22 +44,25 @@ const Cart = () => {
         body: JSON.stringify({ userId, items: tempData }),
       })
       .then(res => res.json())
-      .then(data => console.log('🛒 Cart saved:', data))
-      .catch(err => console.error('❌ Failed to save cart:', err));
+      .then(data => console.log('Cart saved:', data))
+      .catch(err => console.error('Failed to save cart:', err));
     }
 
   }, [cartItems, products]);
 
-  const handleDelete = (itemId, size) => {
-    removeFromCart(itemId, size);
+  const handleDelete = (itemId) => {
+    removeFromCart(itemId);
+    alert('Item deleted from cart');
   };
 
   const total = subtotal + shippingFee;
 
   return (
     <div className='pt-10 px-4 md:px-10'>
-      <div className='text-2xl mb-6'>
-        <Title text1={'YOUR'} text2={'CART'} />
+      <div className="flex items-center justify-center gap-4 mb-8">
+        <h2 className="text-2xl font-medium">
+          Your <strong className="font-bold text-yellow-800">Cart</strong>
+        </h2>
       </div>
 
       {cartData.length === 0 ? (
@@ -78,18 +78,18 @@ const Cart = () => {
               if (!product) return null;
 
               return (
-                <div key={index} className='border-b border-gray-200 py-4 flex justify-between items-center'>
+                <div key={index} className='border-b border-gray-200 py-4 flex items-center justify-between gap-6'>
                   {/* Product Info */}
                   <div className='flex items-center gap-4 w-1/3'>
                     <img
-                      className='w-20 h-20 object-cover'
+                      className='w-20 h-20 object-cover rounded-md'
                       src={product.image?.main || product.image[0]}
                       alt={product.name}
                     />
-                    <div className='space-y-1 text-sm'>
-                      <p className='font-semibold'>{product.name}</p>
-                      <p>Size: {item.size}</p>
-                      <p>Price: {currency}{item.price * item.quantity}</p>
+                    <div className='flex flex-col'>
+                      <p className='font-semibold text-gray-900'>{product.name}</p>
+                      {/* Size removed */}
+                      <p className='text-lg font-bold text-gray-800 mt-1'>{currency}{(item.price * item.quantity).toFixed(2)}</p>
                     </div>
                   </div>
 
@@ -100,27 +100,26 @@ const Cart = () => {
                       min="1"
                       value={item.quantity}
                       onChange={(e) => {
-                        const newQty = parseInt(e.target.value);
+                        const newQty = parseInt(e.target.value) || 1;
                         const diff = newQty - item.quantity;
                         if (diff > 0) {
-                          for (let i = 0; i < diff; i++) addToCart(item.productId, item.size);
+                          for (let i = 0; i < diff; i++) addToCart(item.productId);
                         } else if (diff < 0) {
-                          for (let i = 0; i < Math.abs(diff); i++) decreaseCart(item.productId, item.size);
+                          for (let i = 0; i < Math.abs(diff); i++) decreaseCart(item.productId);
                         }
                       }}
-                      className="w-16 text-center border px-2 py-1"
+                      className="w-16 text-center border rounded-md px-2 py-1"
                     />
                   </div>
 
                   {/* Delete Button */}
                   <div className='w-1/3 flex justify-end'>
                     <button
-                      onClick={() => handleDelete(item.productId, item.size)}
-                      className='text-red-500 text-lg'
-                      title='Delete'
-                    >
-                      🗑️
-                    </button>
+                      onClick={() => handleDelete(item.productId)}
+                      className='text-red-500 text-2xl hover:text-red-600 transition'
+                      title="Delete"
+                      aria-label="Remove item from cart"
+                    > 🗑️ </button>
                   </div>
                 </div>
               );
@@ -129,8 +128,10 @@ const Cart = () => {
 
           {/* Cart Total Section */}
           <div className='w-full lg:w-1/3 lg:ml-auto p-5'>
-            <div className='mb-4'>
-              <Title text1={'CART'} text2={'TOTAL'} />
+            <div className="flex items-center justify-center gap-4 mb-8">
+              <h2 className="text-2xl font-medium">
+                CONTACT <strong className="font-bold">US</strong>
+              </h2>
             </div>
 
             <div className='space-y-3 text-sm'>
@@ -147,7 +148,7 @@ const Cart = () => {
 
               <div className='flex justify-between text-base font-bold'>
                 <span>Total</span>
-                <span>{currency}{(subtotal + shippingFee).toFixed(2)}</span>
+                <span>{currency}{total.toFixed(2)}</span>
               </div>
             </div>
 

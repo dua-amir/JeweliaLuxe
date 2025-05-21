@@ -1,76 +1,3 @@
-/*
-import React from 'react';
-import { assets } from '../assets/assets';
-
-const OurPolicy = () => {
-  return (
-    <>
-      <style>{`
-        .our-policy-container {
-          display: flex;
-          flex-direction: column;
-          justify-content: space-around;
-          gap: 3rem;
-          text-align: center;
-          padding: 2rem 0;
-        }
-
-        @media (min-width: 640px) {
-          .our-policy-container {
-            flex-direction: row;
-            gap: 2rem;
-          }
-        }
-
-        .policy-item {
-          flex: 1;
-        }
-
-        .policy-icon {
-          width: 3rem;
-          height: 3rem;
-          margin: 0 auto 1.25rem auto;
-        }
-
-        .policy-title {
-          font-weight: 700;
-          font-size: 1.1rem;
-        }
-
-        .policy-description {
-          color: #9ca3af;
-          margin-top: 0.25rem;
-        }
-      `}</style>
-
-      <div className="our-policy-container">
-        <div className="policy-item">
-          <img src={assets.Exchange} className="policy-icon" alt="Exchange Icon" />
-          <p className="policy-title">Easy Exchange Policy</p>
-          <p className="policy-description">We offer hassle free exchange policy</p>
-        </div>
-        <div className="policy-item">
-          <img src={assets.Returns} className="policy-icon" alt="Return Icon" />
-          <p className="policy-title">7 Days Return Policy</p>
-          <p className="policy-description">We provide 7 days free return policy</p>
-        </div>
-        <div className="policy-item">
-          <img src={assets.Csr} className="policy-icon" alt="Customer Support Icon" />
-          <p className="policy-title">Best customer support</p>
-          <p className="policy-description">we provide 24/7 customer support</p>
-        </div>
-      </div>
-    </>
-  );
-};
-
-export default OurPolicy;
-*/
-
-
-
-import React from 'react';
-
 const OurPolicy = () => {
   return (
     <section className="bg-white py-14 px-6 md:px-20">
@@ -78,9 +5,8 @@ const OurPolicy = () => {
       {/* Section Heading */}
       <div className="text-center mb-12">
         <p className="text-2xl md:text-3xl font-semibold text-gray-500">
-          Our <span className="text-gray-800">Policy</span>
+          <span className="text-yellow-800"> Our Policy</span>
         </p>
-        <div className="w-20 h-1 bg-gray-800 mx-auto mt-2 mb-4 rounded-full" />
         <p className="text-sm text-gray-500 mx-auto">
           At Jewelia, we prioritize your satisfaction with easy returns, secure shopping, and friendly support.
         </p>

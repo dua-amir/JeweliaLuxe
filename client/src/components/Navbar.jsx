@@ -1,276 +1,193 @@
-/*
 import React, { useContext, useState } from 'react';
-import { assets } from '../assets/assets';
-import { Link, NavLink } from 'react-router-dom';
-import './Navbar.css';
-import { ShopContext } from '../context/ShopContext';
-
-const Navbar = () => {
-  // State for hover effect on nav items
-  const [hovered, setHovered] = useState(null);
-
-  // State to toggle mobile menu visibility
-  const [visible, setVisible] = useState(false);
-
-  // Context values: show search modal & get cart count
-  const { setShowSearch, getCartCount } = useContext(ShopContext);
-
-  // Define navigation items for the navbar
-  const navItems = [
-    { path: '/', label: 'HOME' },
-    { path: '/collection', label: 'COLLECTION' },
-    { path: '/about', label: 'ABOUT' },
-    { path: '/contact', label: 'CONTACT' },
-  ];
-
-  return (
-    <div className="navbar">
-      
-      <Link to='/'>
-        <img src={assets.logo} className="logo" alt="Logo" />
-      </Link>
-
-      <ul className="nav-links">
-        {navItems.map((item, index) => (
-          <NavLink
-            key={item.path}
-            to={item.path}
-            className="nav-link"
-            onMouseEnter={() => setHovered(index)}
-            onMouseLeave={() => setHovered(null)}
-          >
-            <p>{item.label}</p>
-
-            <hr
-              className="separator"
-              style={{ opacity: hovered === index ? 1 : 0 }}
-            />
-          </NavLink>
-        ))}
-      </ul>
-      <div className="icon-section">
-
-        <img
-          onClick={() => setShowSearch(true)}
-          src={assets.searchIcon}
-          className="icon"
-          alt="search"
-        />
-
-        <div className="profile-container">
-        <Link to="/login">
-        <img src={assets.profileIcon} className="icon" alt="profile" />
-        </Link>
-        <div className="dropdown-menu">
-        <p className="dropdown-item">Profile</p>
-        <p className="dropdown-item">Orders</p>
-        <p className="dropdown-item">Logout</p>
-        </div>
-        </div>
-
-
-        <Link to="/cart" className="cart-container">
-          <img src={assets.cart} className="cart-icon" alt="cart" />
-          <p className="cart-count">{getCartCount()}</p>
-        </Link>
-
-        <img
-          onClick={() => setVisible(true)}
-          src={assets.menuIcon}
-          className="menu-icon"
-          alt="menu"
-        />
-      </div>
-
-      <div className={`mobile-menu ${visible ? 'show' : ''}`}>
-        <div className="mobile-menu-content">
-
-
-          <div onClick={() => setVisible(false)} className="back-btn">
-            <p>Back</p>
-          </div>
-
-          <NavLink to="/" className="mobile-link">HOME</NavLink>
-          <NavLink to="/collection" className="mobile-link">COLLECTION</NavLink>
-          <NavLink to="/about" className="mobile-link">ABOUT</NavLink>
-          <NavLink to="/contact" className="mobile-link">CONTACT</NavLink>
-        </div>
-      </div>
-    </div>
-  );
-};
-
-export default Navbar;
-*/
-
-
-import React, { useContext, useState } from 'react';
-import { assets } from '../assets/assets';
-import { Link, NavLink } from 'react-router-dom';
+import { Link, NavLink, useNavigate } from 'react-router-dom';
 import { ShopContext } from '../context/ShopContext';
 
 const Navbar = () => {
   const [hovered, setHovered] = useState(null);
   const [visible, setVisible] = useState(false);
-  const [profileDropdown, setProfileDropdown] = useState(false);
+  const [dropdownOpen, setDropdownOpen] = useState(false);
+  const navigate = useNavigate();
+  const { setShowSearch } = useContext(ShopContext);
 
-  const { setShowSearch, getCartCount } = useContext(ShopContext);
-
-  // For demo, replace this with real auth context/state
-  const [isLoggedIn, setIsLoggedIn] = useState(false);
+  const username = localStorage.getItem("username");
 
   const navItems = [
-    { path: '/', label: 'HOME' },
-    { path: '/collection', label: 'COLLECTION' },
-    { path: '/about', label: 'ABOUT' },
-    { path: '/contact', label: 'CONTACT' },
+    { path: '/', label: 'Home' },
+    { path: '/collection', label: 'Products' },
+    { path: '/about', label: 'About' },
+    { path: '/contact', label: 'Contact' },
   ];
 
+  const handleLogout = () => {
+    localStorage.clear();
+    alert("Logout successful!");
+    navigate("/");
+    window.location.reload();
+  };
+
   return (
-    <nav className="bg-white shadow-md px-6 py-4 flex items-center justify-between font-sans relative z-50">
-      
-      {/* Logo */}
-      <Link to="/">
-        <img src={assets.logo} alt="Logo" className="w-24 object-contain" />
-      </Link>
+    <header className="w-full mb-10 shadow-md bg-white sticky top-0 z-50">
+      <div className="max-w-7xl mx-auto flex items-center justify-between px-5 py-4">
+        {/* Logo */}
+        <Link to="/" className="flex items-center space-x-2">
+          <img src="/assets/JeweliaLogo.png" alt="Logo" className="h-18 object-contain" />
+        </Link>
 
-      {/* Desktop Nav Links */}
-      <ul className="hidden md:flex space-x-10">
-        {navItems.map((item, index) => (
-          <NavLink
-            key={item.path}
-            to={item.path}
-            className={({ isActive }) =>
-              `relative text-gray-700 hover:text-gray-900 font-semibold px-1 ${
-                isActive ? 'text-gray-900' : ''
-              }`
-            }
-            onMouseEnter={() => setHovered(index)}
-            onMouseLeave={() => setHovered(null)}
-          >
-            <p>{item.label}</p>
-            <hr
-              className="border-t-2 border-gray-900 absolute left-0 right-0 bottom-0 transition-opacity duration-200"
-              style={{ opacity: hovered === index ? 1 : 0 }}
-            />
-          </NavLink>
-        ))}
-      </ul>
+        {/* Nav Links */}
+        <nav className="hidden md:flex space-x-10">
+          {navItems.map((item, index) => (
+            <NavLink
+              key={item.path}
+              to={item.path}
+              onMouseEnter={() => setHovered(index)}
+              onMouseLeave={() => setHovered(null)}
+              className={({ isActive }) =>
+                `relative text-lg font-semibold transition-colors duration-300 ${
+                  isActive ? 'text-yellow-800' : 'text-gray-700 hover:text-yellow-600'
+                }`
+              }
+            >
+              {item.label}
+              <span
+                className={`absolute -bottom-1 left-0 w-full h-[2px] bg-yellow-600 transition-opacity duration-300 ${
+                  hovered === index ? 'opacity-100' : 'opacity-0'
+                }`}
+              ></span>
+            </NavLink>
+          ))}
+        </nav>
 
-      {/* Icons Section */}
-      <div className="flex items-center space-x-6">
-        {/* Search Icon */}
-        <button
-          onClick={() => setShowSearch(true)}
-          className="focus:outline-none"
-          aria-label="Search"
-        >
-          <img src={assets.searchIcon} alt="Search" className="w-6 h-6" />
-        </button>
+        {/* Right Icons */}
+        <div className="flex items-center gap-5">
+          <img
+            src="/assets/searchicon.jpg"
+            alt="Search"
+            className="w-7 h-7 cursor-pointer hover:scale-110 transition-transform"
+            onClick={() => setShowSearch(true)}
+          />
 
-        {/* Profile Icon with dropdown */}
-        <div className="relative">
-          <button
-            onClick={() => setProfileDropdown(!profileDropdown)}
-            className="focus:outline-none"
-            aria-label="User Profile"
-          >
+          <Link to="/cart">
             <img
-              src={assets.profileIcon}
-              alt="Profile"
-              className="w-7 h-7 rounded-full hover:ring-2 hover:ring-gray-300 transition"
+              src="/assets/cartIcon.png"
+              alt="Cart"
+              className="w-7 h-7 cursor-pointer hover:scale-110 transition-transform"
             />
-          </button>
+          </Link>
 
-          {profileDropdown && (
-            <div className="absolute right-0 mt-2 w-40 bg-white border border-gray-200 rounded-md shadow-lg py-2 text-gray-700 font-medium text-sm">
-              {!isLoggedIn ? (
-                <>
+          {/* Profile Dropdown */}
+          <div className="relative">
+            <img
+              src="/assets/profileIcon.png"
+              alt="Profile"
+              className="w-8 h-8 cursor-pointer rounded-full border border-gray-300 p-1 hover:shadow-md transition-shadow"
+              onClick={() => setDropdownOpen(!dropdownOpen)}
+            />
+            {dropdownOpen && (
+              <div className="absolute right-0 mt-10 w-48 bg-white border rounded-lg shadow-lg py-2 z-50">
+                {username ? (
+                  <>
+                    <p className="px-4 py-2 text-yellow-600 font-medium">Hi, {username}</p>
+                    <button
+                      onClick={() => {
+                        setDropdownOpen(false);
+                        navigate("/profile");
+                      }}
+                      className="w-full text-left px-4 py-2 text-gray-600 hover:bg-gray-100"
+                    >
+                      Profile
+                    </button>
+                    <button
+                      onClick={handleLogout}
+                      className="w-full text-left px-4 py-2 text-gray-600 hover:bg-gray-100"
+                    >
+                      Logout
+                    </button>
+                  </>
+                ) : (
                   <Link
                     to="/login"
-                    className="block px-4 py-2 hover:bg-gray-100"
-                    onClick={() => setProfileDropdown(false)}
+                    onClick={() => setDropdownOpen(false)}
+                    className="block px-4 py-2 text-gray-700 hover:bg-gray-100"
                   >
-                    Login
+                    Login / Sign Up
                   </Link>
-                  <Link
-                    to="/signup"
-                    className="block px-4 py-2 hover:bg-gray-100"
-                    onClick={() => setProfileDropdown(false)}
-                  >
-                    Sign Up
-                  </Link>
-                </>
-              ) : (
-                <>
-                  <Link
-                    to="/profile"
-                    className="block px-4 py-2 hover:bg-gray-100"
-                    onClick={() => setProfileDropdown(false)}
-                  >
-                    Profile
-                  </Link>
-                  <button
-                    onClick={() => {
-                      // Add logout logic here
-                      setIsLoggedIn(false);
-                      setProfileDropdown(false);
-                    }}
-                    className="w-full text-left px-4 py-2 hover:bg-gray-100"
-                  >
-                    Logout
-                  </button>
-                </>
-              )}
-            </div>
-          )}
+                )}
+              </div>
+            )}
+          </div>
+
+          {/* Mobile Menu */}
+          <img
+            src="/assets/menuIcon.png"
+            alt="Menu"
+            onClick={() => setVisible(true)}
+            className="w-6 h-6 cursor-pointer md:hidden"
+          />
         </div>
-
-        {/* Cart Icon (no item count) */}
-        <Link to="/cart" className="relative focus:outline-none">
-          <img src={assets.cart} alt="Cart" className="w-7 h-7" />
-        </Link>
-
-        {/* Mobile menu icon */}
-        <button
-          onClick={() => setVisible(true)}
-          className="md:hidden focus:outline-none"
-          aria-label="Open menu"
-        >
-          <img src={assets.menuIcon} alt="Menu" className="w-6 h-6" />
-        </button>
       </div>
 
-      {/* Mobile Sidebar Menu */}
+      {/* Mobile Sidebar */}
       <div
-        className={`fixed inset-0 bg-black bg-opacity-40 z-40 transform transition-transform duration-300 ${
+        className={`fixed top-0 right-0 h-full w-64 bg-white shadow-lg transform ${
           visible ? 'translate-x-0' : 'translate-x-full'
-        } md:hidden`}
+        } transition-transform duration-300 z-50`}
       >
-        <div className="bg-white w-64 h-full p-6 flex flex-col">
-          {/* Close Button */}
+        <div className="flex flex-col p-5 space-y-5">
           <button
             onClick={() => setVisible(false)}
-            className="mb-6 text-gray-700 font-semibold focus:outline-none"
+            className="self-end text-gray-500 hover:text-gray-800 text-xl"
           >
-            &larr; Back
+            ✕
           </button>
 
           {navItems.map((item) => (
             <NavLink
               key={item.path}
               to={item.path}
-              className="mb-4 text-gray-700 font-semibold hover:text-gray-900"
               onClick={() => setVisible(false)}
+              className="text-lg text-gray-700 hover:text-yellow-500 font-medium"
             >
               {item.label}
             </NavLink>
           ))}
+
+          <hr />
+
+          {username ? (
+            <>
+              <p className="text-gray-600">Hi, {username}</p>
+              <button
+                onClick={() => {
+                  setVisible(false);
+                  navigate("/profile");
+                }}
+                className="text-left text-gray-700 hover:text-yellow-500"
+              >
+                Profile
+              </button>
+              <button
+                onClick={() => {
+                  setVisible(false);
+                  handleLogout();
+                }}
+                className="text-left text-gray-700 hover:text-yellow-500"
+              >
+                Logout
+              </button>
+            </>
+          ) : (
+            <Link
+              to="/login"
+              onClick={() => setVisible(false)}
+              className="text-gray-700 hover:text-yellow-500"
+            >
+              Login / Sign Up
+            </Link>
+          )}
         </div>
       </div>
-    </nav>
+    </header>
   );
 };
 
 export default Navbar;
-

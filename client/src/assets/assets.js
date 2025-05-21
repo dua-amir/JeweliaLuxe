@@ -1,370 +1,184 @@
- 
- import cart from './cart.png';
- import deleteIcon from './delete.png';
- import diamondring from './diamondring.jpg';
- import earings from './earings.jpg';
- import elegantRing from './elegantring.jpg';
- import flowerEarings from './flowerearings.jpg';
- import flowerPendant from './flowerpendant.jpg';
- import logo from './logo.png';
- import longEarings from './longearings.jpg';
- import pendant from './pendant.jpg';
- import pinkStoneRing from './pinkstonering.jpg';
- import roundPendant from './roundpendant.jpg';
- import roundEarings from './roundearings.jpg';
- import silverRing from './silverring.jpg';
- import squarePendant from './squarependant.jpg';
- import topsShort from './topsshort.jpg';
- import searchIcon from './search-icon.png';
- import profileIcon from './profileIcon.png';
- import menuIcon from './menu.png';
- import Hero from './hero.jpeg';
- import heroes from './heroes.png';
-import geometricTops from './geometrictops.jpg';
-import squareTops from './sqauretops.jpg';
-import vintageTops from './vintagetops.jpg';
-import flowerTops from './flowertops.jpg';
-import pearlDaintyEarings from './pearldaintyearings.jpg';
-import hollowTops from './hollowtops.jpg';
-import ballEarings from './ballearings.jpg';
-import minimalistTops from './minimalisttops.jpg';
-import elegantBracelet from './elegantbracelet.jpg';
-import goldRing from './goldring.jpg';
-import goldHeartBracelet from './goldheartbracelet.jpg';
-import ballBracelet from './ballbracelet.png';
-import pearlBracelet from './pearlbracelet.jpg';
-import heartBracelet from './heartbracelet.jpg';
-import packOf4Bracelets from './packof4bracelets.jpg';
-import fillHeartRing from './fillheartring.jpg';
-import pearlsRing from './pearlsring.jpg';
-import butterflyRing from './butterflyring.jpg';
-import About from './about.jpg';
-
-import Exchange from './exchange.png';
-import Csr from './csr.png';
-import Returns from './return.png';
-import CrossIcon from './cross_icon.png';
-
- const assets = {
-
-   logo,heroes,About,
-   CrossIcon,
-   Exchange,
-  Csr,
-  Returns,
-  geometricTops,
-  squareTops,
-  vintageTops,
-  flowerTops,
-  pearlDaintyEarings,
-  hollowTops,
-  ballEarings,
-  minimalistTops,
-  elegantBracelet,
-  goldRing,
-  goldHeartBracelet,
-  ballBracelet,
-  pearlBracelet,
-  heartBracelet,
-  packOf4Bracelets,
-  fillHeartRing,
-  pearlsRing,
-  butterflyRing,
-   Hero,
-   menuIcon,
-   profileIcon,
-   cart,
-   deleteIcon,
-   diamondring,
-   earings,
-   elegantRing,
-   flowerEarings,
-   flowerPendant,
-   longEarings,
-   pendant,
-   pinkStoneRing,
-   roundPendant,
-   roundEarings,
-   silverRing,
-   squarePendant,
-   topsShort,
-   searchIcon
- };
- 
- const products = [
+const products = [
   {
     id: "1",
-    name: "Diamond Ring",
-    price: 4500,
-    category: "Ring",
-    subcategory: "accessories",
-    material: "Gold",
-    description: "Elegant diamond ring with a premium cut for luxury events.",
-    size: ["10-20y", "20-30y"],
-    date: "2025-04-10",
-    bestSeller: false,
+    name: "Acrylic Jewelry Set",
+    price: 16,
+    description: "A beautiful jewelry set made from high-quality acrylic. Lightweight and stylish, perfect for any special occasion or daily wear. Adds a modern touch to your outfit.",
     image: {
-      main: diamondring,
-      gallery: [diamondring, elegantRing, pinkStoneRing],
+      main: "assets/AcrylicJewelrySet.webp",
     },
   },
   {
     id: "2",
-    name: "Elegant Ring",
-    price: 3900,
-    category: "Ring",
-    subcategory: "accessories",
-    material: "Platinum",
-    description: "Sophisticated ring design for modern style statements.",
-    size: ["20-30y"],
-    date: "2025-04-09",
-    bestSeller: false,
+    name: "Heart Necklace",
+    price: 1,
+    description: "A charming heart-shaped necklace that expresses love and affection. Simple yet elegant, ideal for gifting or wearing daily to keep your loved ones close.",
     image: {
-      main: elegantRing,
-      gallery: [elegantRing, diamondring, silverRing],
+      main: "assets/heart.jpg",
     },
   },
   {
     id: "3",
-    name: "Pink Stone Ring",
-    price: 3100,
-    category: "Ring",
-    subcategory: "accessories",
-    material: "Gold",
-    description: "Pink gemstone ring for charming looks and soft elegance.",
-    size: ["10-20y"],
-    date: "2025-04-08",
-    bestSeller: false,
+    name: "Metal Chain Bracelet",
+    price: 11,
+    description: "A sturdy metal chain bracelet with a sleek finish. Perfect to complement both casual and formal looks. Durable and timeless accessory for your wrist.",
     image: {
-      main: pinkStoneRing,
-      gallery: [pinkStoneRing, elegantRing],
+      main: "assets/metalChainBracelet.jpeg",
     },
   },
   {
     id: "4",
-    name: "Silver Ring",
-    price: 2700,
-    category: "Ring",
-    subcategory: "accessories",
-    material: "Silver",
-    description: "Classic silver ring for all occasions and easy matching.",
-    size: ["10-20y", "20-30y"],
-    date: "2025-04-05",
-    bestSeller: false,
+    name: "Butterfly Open Ring",
+    price: 11,
+    description: "Delicate open ring featuring a butterfly design. Adds a feminine and whimsical touch to your style. Comfortable and adjustable to fit any finger.",
     image: {
-      main: silverRing,
-      gallery: [silverRing, diamondring],
+      main: "assets/butterflyOpenRing.webp",
     },
   },
   {
     id: "5",
-    name: "Round Pendant",
-    price: 2500,
-    category: "Necklace",
-    subcategory: "top wear",
-    material: "Silver",
-    description: "Stylish round pendant with minimalistic design.",
-    size: ["10-20y", "20-30y"],
-    date: "2025-04-06",
-    bestSeller: false,
+    name: "Rhinestone Bracelet",
+    price: 10,
+    description: "Sparkling rhinestone bracelet that shines beautifully in light. Adds elegance and glamour to any outfit. Perfect for parties and special occasions.",
     image: {
-      main: roundPendant,
-      gallery: [roundPendant, pendant],
+      main: "assets/rhinestoneBracelet.jpg",
     },
   },
   {
     id: "6",
-    name: "Square Pendant",
-    price: 2300,
-    category: "Necklace",
-    subcategory: "top wear",
-    material: "Silver",
-    description: "Geometric square pendant in sleek silver finish.",
-    size: ["20-30y"],
-    date: "2025-04-07",
-    bestSeller: false,
+    name: "Gold Twisted Ring",
+    price: 14,
+    description: "A stylish gold-toned twisted ring with a modern design. Simple yet eye-catching accessory for everyday wear or events. Lightweight and comfortable.",
     image: {
-      main: squarePendant,
-      gallery: [squarePendant, pendant],
+      main: "assets/goldTwistedRing.jpg",
     },
   },
   {
     id: "7",
-    name: "Flower Pendant",
-    price: 2800,
-    category: "Necklace",
-    subcategory: "top wear",
-    material: "Gold",
-    description: "Floral pendant with soft curves and detailed petals.",
-    size: ["10-20y"],
-    date: "2025-04-08",
-    bestSeller: false,
+    name: "Pearl Earring",
+    price: 7,
+    description: "Classic pearl earrings that add grace and sophistication. Perfect for formal occasions or to enhance your daily look with elegance.",
     image: {
-      main: flowerPendant,
-      gallery: [flowerPendant, roundPendant],
+      main: "assets/pearlEarring.avif",
     },
   },
   {
     id: "8",
-    name: "Flower Earrings",
-    price: 1900,
-    category: "Earrings",
-    subcategory: "accessories",
-    material: "Gold",
-    description: "Flower-shaped earrings for vibrant and fresh style.",
-    size: ["10-20y"],
-    date: "2025-04-03",
-    bestSeller: false,
+    name: "Butterfly Pendant",
+    price: 11,
+    description: "Elegant butterfly-shaped pendant that symbolizes transformation and beauty. Lightweight and easy to pair with any necklace chain.",
     image: {
-      main: flowerEarings,
-      gallery: [flowerEarings, earings, longEarings],
+      main: "assets/butterflyPendant.jpg",
     },
   },
   {
     id: "9",
-    name: "Round Earrings",
-    price: 1800,
-    category: "Earrings",
-    subcategory: "accessories",
-    material: "Silver",
-    description: "Minimalist round earrings to complement any outfit.",
-    size: ["10-20y", "20-30y"],
-    date: "2025-04-01",
-    bestSeller: false,
+    name: "Elegant Jumka",
+    price: 7,
+    description: "Traditional Indian style jumka earrings with intricate detailing. Adds a festive and ethnic charm to your outfit. Great for weddings and celebrations.",
     image: {
-      main: roundEarings,
-      gallery: [roundEarings, longEarings],
+      main: "assets/elegantJumka.webp",
     },
   },
   {
     id: "10",
-    name: "Long Earrings",
-    price: 2200,
-    category: "Earrings",
-    subcategory: "accessories",
-    material: "Platinum",
-    description: "Dangling long earrings for a bold fashion statement.",
-    size: ["20-30y"],
-    date: "2025-04-02",
-    bestSeller: false,
+    name: "Flower Jewelry Combo set",
+    price: 15,
+    description: "Beautiful flower-inspired jewelry set including matching pieces. Perfect for nature lovers and those who enjoy delicate, floral designs.",
     image: {
-      main: longEarings,
-      gallery: [longEarings, flowerEarings],
+      main: "assets/flower.jpg",
     },
   },
   {
     id: "11",
-    name: "Short top Set",
-    price: 3200,
-    category: "Earrings",
-    subcategory: "top wear",
-    material: "Gold",
-    description: "Trendy short top set for casual wear with comfort.",
-    size: ["10-20y", "20-30y"],
-    date: "2025-04-12",
-    bestSeller: true,
+    name: "Silver Jewelry Rings",
+    price: 15,
+    description: "Shiny silver rings with elegant designs. Ideal for everyday wear or special occasions. Adds a classic touch to your jewelry collection.",
     image: {
-      main: topsShort,
-      gallery: [topsShort, logo],
+      main: "assets/silver.jpg",
     },
   },
   {
     id: "12",
-    name: "Geometric Top",
-    price: 3400,
-    category: "Earrings",
-    subcategory: "top wear",
-    material: "Silver",
-    description: "Modern geometric patterned top for edgy styling.",
-    size: ["10-20y", "20-30y"],
-    date: "2025-04-11",
-    bestSeller: false,
+    name: "Opal Tulip Bracelet",
+    price: 9,
+    description: "Delicate bracelet featuring tulip shapes and opal accents. Feminine and stylish accessory that enhances any outfit with subtle sparkle.",
     image: {
-      main: geometricTops,
-      gallery: [geometricTops, squareTops],
+      main: "assets/tulip.avif",
     },
   },
   {
     id: "13",
-    name: "Pearl Dainty Earrings",
-    price: 2000,
-    category: "Earrings",
-    subcategory: "accessories",
-    material: "Platinum",
-    description: "Elegant dainty pearl earrings for timeless beauty.",
-    size: ["20-30y"],
-    date: "2025-04-04",
-    bestSeller: true,
+    name: "Crystal Bracelets",
+    price: 9,
+    description: "Shimmering crystal bracelets that catch the light beautifully. Perfect for adding a little sparkle to casual or formal wear.",
     image: {
-      main: pearlDaintyEarings,
-      gallery: [pearlDaintyEarings, ballEarings],
+      main: "assets/crystal.webp",
     },
   },
   {
     id: "14",
-    name: "Elegant Bracelet",
-    price: 3700,
-    category: "Bracelet",
-    subcategory: "accessories",
-    material: "Gold",
-    description: "Chic and classy bracelet for formal events.",
-    size: ["10-20y", "20-30y"],
-    date: "2025-04-06",
-    bestSeller: true,
+    name: "Stud Earrings",
+    price: 10,
+    description: "Simple and elegant stud earrings that suit any style. Perfect for daily wear or subtle additions to formal attire.",
     image: {
-      main: elegantBracelet,
-      gallery: [elegantBracelet, goldHeartBracelet],
+      main: "assets/stud.webp",
     },
   },
   {
     id: "15",
-    name: "Gold Ring",
-    price: 4600,
-    category: "Ring",
-    subcategory: "accessories",
-    material: "Gold",
-    description: "Shiny gold ring, perfect for traditional and modern attire.",
-    size: ["20-30y"],
-    date: "2025-04-07",
-    bestSeller: true,
+    name: "Diamond Set",
+    price: 54,
+    description: "Luxurious diamond jewelry set that shines with brilliance. Ideal for weddings, celebrations, or making a bold style statement.",
     image: {
-      main: goldRing,
-      gallery: [goldRing, fillHeartRing, pearlsRing],
+      main: "assets/diamond.jpg",
     },
   },
   {
     id: "16",
-    name: "Butterfly Ring",
-    price: 2900,
-    category: "Ring",
-    subcategory: "accessories",
-    material: "Silver",
-    description: "Adorable butterfly-shaped ring for soft aesthetics.",
-    size: ["10-20y"],
-    date: "2025-04-09",
-    bestSeller: false,
+    name: "Dazzling Earings",
+    price: 11,
+    description: "Eye-catching earrings that add sparkle and glamour. Perfect for parties and special events to complement your look.",
     image: {
-      main: butterflyRing,
-      gallery: [butterflyRing, pinkStoneRing],
+      main: "assets/dazling.webp",
     },
   },
   {
     id: "17",
-    name: "Pack of 4 Bracelets",
-    price: 5200,
-    category: "Bracelet",
-    subcategory: "accessories",
-    material: "Platinum",
-    description: "Complete bracelet set to mix and match styles.",
-    size: ["10-20y", "20-30y"],
-    date: "2025-04-12",
-    bestSeller: true,
+    name: "Zircon Necklace set",
+    price: 18,
+    description: "Elegant necklace set adorned with shimmering zircon stones. Adds sophistication and sparkle to any outfit or occasion.",
     image: {
-      main: packOf4Bracelets,
-      gallery: [packOf4Bracelets, pearlBracelet, heartBracelet],
+      main: "assets/zircon.jpg",
+    },
+  },
+  {
+    id: "18",
+    name: "Jhumka Earings",
+    price: 8,
+    description: "Traditional jhumka earrings with detailed craftsmanship. Perfect for ethnic wear and festive occasions to complete your look.",
+    image: {
+      main: "assets/jumka.webp",
+    },
+  },
+  {
+    id: "19",
+    name: "Gold Bracelet",
+    price: 9,
+    description: "Classic gold bracelet with a smooth finish. Adds timeless elegance and can be worn daily or on special occasions.",
+    image: {
+      main: "assets/gold.jpg",
+    },
+  },
+  {
+    id: "20",
+    name: "Diamond Ring",
+    price: 86,
+    description: "A stunning diamond ring that represents luxury and commitment. Perfect as a gift or for special moments in life.",
+    image: {
+      main: "assets/ring.jpg",
     },
   },
 ];
 
- 
- export { assets, products };
+export { products };

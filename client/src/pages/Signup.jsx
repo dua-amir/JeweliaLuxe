@@ -32,7 +32,7 @@ const Signup = () => {
         onSubmit={handleSignup}
         className="bg-white p-8 rounded-xl shadow-lg w-full max-w-md space-y-5"
       >
-        <h2 className="text-2xl font-semibold text-center text-gray-900">Sign Up</h2>
+        <h2 className="text-2xl font-semibold text-center text-yellow-800">Sign Up</h2>
         <input
           type="text"
           placeholder="Your Name"
@@ -56,15 +56,15 @@ const Signup = () => {
         />
         <button
           type="submit"
-          className="w-full bg-black text-white py-2 rounded-md hover:bg-gray-800"
+          className="w-full bg-yellow-800 text-white py-2 rounded-md hover:bg-gray-800"
         >
           Register
         </button>
-        <p className="text-sm text-center mt-2">
+        <p className="text-sm text-center mt-2 text-yellow-800">
           Already have an account?{" "}
           <a
             href="/login"
-            className="text-gray-800 font-medium hover:underline"
+            className="text-yellow-800 text-bold font-medium hover:underline"
           >
             Login
           </a>
